@@ -120,3 +120,31 @@ When `.targets` file will be added to `build` directory in the package then the 
     </files>
 </package>
 ```
+
+## Check if it works
+
+Now we have created nuget package. It's time to test it.
+At first let's add new nuget repository to Visual Studio.
+
+![Visual Studio options](img/vs-setup-nuget.png)
+
+### Test with .net framework
+
+Let's install package `BuildProcessExtension.0.1.0.nupkg`. After installation you will see additional entry in [`.csproj`](ExtendBuildProcess.netframework/ExtendBuildProcess.netframework.csproj)
+
+```xml
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    ...
+    <Import Project="..\packages\BuildProcessExtension.0.1.0\build\net472\BuildProcessExtension.targets" Condition="Exists('..\packages\BuildProcessExtension.0.1.0\build\net472\BuildProcessExtension.targets')" />
+    <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+        <PropertyGroup>
+            <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+        </PropertyGroup>
+        <Error Condition="!Exists('..\packages\BuildProcessExtension.0.1.0\build\net472\BuildProcessExtension.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\BuildProcessExtension.0.1.0\build\net472\BuildProcessExtension.targets'))" />
+    </Target>
+</Project>
+```
+
+After `Clean` and `Build` we can find the file in project directory
+
+![Visual Studio Result](img/build-with-file-2.png)
