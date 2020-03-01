@@ -165,4 +165,24 @@ To install package in .net core assembly we have to extened targets in [`.nuspec
  </package>
  ```
 
-Now package is also targeted to .Net Standard 2.0, so we can install it in .net core assembly.
+Now package is also targeted to .Net Standard 2.0, so we can install `BuildProcessExtension.0.2.0.nupkg` in .net core assembly.
+After installation you will see only entry about reference to the package in [`.csproj`](ExtendBuildProcess.netcore/ExtendBuildProcess.netcore.csproj)
+
+```xml
+<Project Sdk="Microsoft.NET.Sdk">
+  ...
+  <ItemGroup>
+    <PackageReference Include="BuildProcessExtension" Version="0.2.0" />
+  </ItemGroup>
+
+</Project>
+
+```
+
+After `Clean` and `Build` we can find the file in project directory
+
+![Visual Studio Result](img/build-with-file-3.png)
+
+After build via .net core cli files are created also
+
+![.net core cli](img/build-with-file-cli.png)
