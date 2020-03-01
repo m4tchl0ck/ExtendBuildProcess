@@ -52,5 +52,6 @@
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
     <Target Name="Custom steps" AfterTargets="Build">
         <Message Text="Hello World!" />
+        <Exec Command="echo Hello World >> some-file"/>
     </Target>
 </Project>

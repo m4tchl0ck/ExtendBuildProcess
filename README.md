@@ -28,3 +28,21 @@ Let's start with showing some message in build process. To do it we add [`<Messa
 Unfortunatly the result of this change cannot be seen when we build project in Visual Studio, to check if it works we have to use `msbuild.exe`(maybe you can find it in the following path `C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\MSBuild.exe`)
 
 ![MSBuild Result](img/build-with-message.png)
+
+### Execute external program
+
+To check if our task is executing when we are building in Visual Studio let's change the task to create a file, in order to do it we use [`<Exec />` task](https://docs.microsoft.com/en-us/visualstudio/msbuild/exec-task) and OS instruction `echo "Hello World" >> some-file`
+
+```xml
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    ...
+    <Target Name="Custom steps" AfterTargets="Build">
+        <Message Text="Hello World!" />
+        <Exec Command="echo Hello World >> some-file"/>
+    </Target>
+</Project>
+```
+
+After `Clean` and `Build` we can find the file in the project directory
+
+![Visual Studio Result](img/build-with-file.png)
