@@ -10,5 +10,6 @@
     </metadata>
     <files>
         <file src=".\_._" target="lib\net472" />
+        <file src=".\BuildProcessExtension.targets" target="build\net472" />
     </files>
 </package>

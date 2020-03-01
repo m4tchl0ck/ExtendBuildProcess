@@ -106,3 +106,17 @@ When we want to create a package only with build definition we have to add empty
     </files>
 </package>
 ```
+
+### Add build steps to package
+
+When `.targets` file will be added to `build` directory in the package then the nuget will add automaticaly `Import` to `.csproj` after installation.
+
+```xml
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    ...
+    <files>
+        ...
+        <file src=".\BuildProcessExtension.targets" target="build\net472" />
+    </files>
+</package>
+```
