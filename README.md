@@ -69,3 +69,40 @@ In `.csproj` we have to add information about this file
     <Import Project=".\my-targets.targets" />
 </Project>
 ```
+
+## Put `.targets` into nuget package
+
+At first to create package we need `nuget.exe` file (you can find it [here](https://www.nuget.org/downloads))
+
+```sh
+nuget.exe pack .\BuildProcessExtension.nuspec
+```
+
+Nuget package should be defined in the file with the following extention [`.nuspec`](BuildProcessExtension/BuildProcessExtension.nuspec)([read more](https://docs.microsoft.com/pl-pl/nuget/create-packages/creating-a-package))
+
+```xml
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    <metadata>
+        <id>BuildProcessExtension</id>
+        <version>0.1</version>
+        <description>desc</description>
+        <authors>me</authors>
+        <dependencies>
+          <group targetFramework=".NETFramework4.7.2" />
+        </dependencies>
+    </metadata>
+</package>
+```
+
+### Package without `.dll`
+
+When we want to create a package only with build definition we have to add empty file with the name `_._` to `lib` directory in the package([it is official solution](https://docs.microsoft.com/en-us/nuget/reference/errors-and-warnings/nu5127))
+
+```xml
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    ...
+    <files>
+        <file src=".\_._" target="lib\net472" />
+    </files>
+</package>
+```

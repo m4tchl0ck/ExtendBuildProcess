@@ -1,0 +1,14 @@
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    <metadata>
+        <id>BuildProcessExtension</id>
+        <version>0.1</version>
+        <description>desc</description>
+        <authors>me</authors>
+        <dependencies>
+            <group targetFramework=".NETFramework4.7.2" />
+        </dependencies>
+    </metadata>
+    <files>
+        <file src=".\_._" target="lib\net472" />
+    </files>
+</package>
