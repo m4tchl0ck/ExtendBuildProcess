@@ -46,3 +46,26 @@ To check if our task is executing when we are building in Visual Studio let's ch
 After `Clean` and `Build` we can find the file in the project directory
 
 ![Visual Studio Result](img/build-with-file.png)
+
+## Extract build steps from csproj
+
+Now we know how to extend the build process, let's move on to transfer the definition to seperate file([read more](https://docs.microsoft.com/en-us/visualstudio/msbuild/how-to-use-the-same-target-in-multiple-project-files)).
+To do it let's create a file with following extension `.targets`(for example [`BuildProcessExtension.targets`](BuildProcessExtension/BuildProcessExtension.targets)) then let's transfer the definition to this file
+
+```xml
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <Target Name="Custom steps" AfterTargets="Build">
+        <Message Text="Hello World!" />
+        <Exec Command="echo Hello World >> some-file"/>
+    </Target>
+</Project>
+```
+
+In `.csproj` we have to add information about this file
+
+```xml
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    ...
+    <Import Project=".\my-targets.targets" />
+</Project>
+```

@@ -1,0 +1,6 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <Target Name="Custom steps" AfterTargets="Build">
+        <Message Text="Hello World!" />
+        <Exec Command="echo Hello World >> some-file"/>
+    </Target>
+</Project>
