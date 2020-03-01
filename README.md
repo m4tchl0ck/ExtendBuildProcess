@@ -148,3 +148,21 @@ Let's install package `BuildProcessExtension.0.1.0.nupkg`. After installation yo
 After `Clean` and `Build` we can find the file in project directory
 
 ![Visual Studio Result](img/build-with-file-2.png)
+
+### Test with .net core
+
+To install package in .net core assembly we have to extened targets in [`.nuspec`](BuildProcessExtension/BuildProcessExtension.nuspec) file
+
+```xml
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    ...
+    <files>
+        <file src=".\_._" target="lib\net472" />
+        <file src=".\_._" target="lib\netstandard2.0" />
+        <file src=".\BuildProcessExtension.targets" target="build\net472" />
+        <file src=".\BuildProcessExtension.targets" target="build\netstandard2.0" />
+     </files>
+ </package>
+ ```
+
+Now package is also targeted to .Net Standard 2.0, so we can install it in .net core assembly.
