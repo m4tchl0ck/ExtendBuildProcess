@@ -186,3 +186,9 @@ After `Clean` and `Build` we can find the file in project directory
 After build via .net core cli files are created also
 
 ![.net core cli](img/build-with-file-cli.png)
+
+## Summary
+
+Like you see it is not difficult to deliver build steps as a nuget package. Everything works correctly in both .net branches.
+You have to decide if this is a good approach in your environment or not.
+I can only say... It depends :)
